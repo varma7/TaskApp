@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title_block %}
+    Personal Task Assistant
+{% endblock %}
+
+{% block body_block %}
+
+    <form action="{% url 'createtask' %}" method="POST">
+        <p>
+            <center>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-success" type="submit" value="Create Task">
+            </center>
+        </p>
+
+    </form>
+    {% for i in listout %}
+           <ul class="list-group">
+                <li class="list-group-item">
+                    <p><h5>{{i}}</h5></p>
+                    <a href="{% url 'updatetask' i.id %}"><button class="btn btn-success">Update</button></a>
+                    <a href="{% url 'deletetask' i.id %}"><button class="btn btn-danger">Delete</button></a>
+                </li>
+            </ul>
+ {% endfor %}
+
+{% endblock %}
